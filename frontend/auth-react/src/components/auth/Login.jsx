@@ -1,14 +1,34 @@
 import React, { useState } from "react";
 import { useUserContext } from "../../contexts/UserContextProvider";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+const apiUrl = import.meta.env.VITE_API_URL;
+import { setUserData } from "../../customhooks/useLocalstorage";
 
 const Login = () => {
-  const { user, setUser } = useUserContext();
+  const { setUser } = useUserContext();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setUser(true);
+    try {
+      setLoading(true);
+      const { data } = await axios.post(`${apiUrl}/auth/login`, {
+        email,
+        password,
+      });
+
+      setUserData(data.accessToken);
+      setUser(data.accessToken);
+      navigate("/");
+    } catch (error) {
+      console.log("Login failed:", error?.response?.data?.error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (

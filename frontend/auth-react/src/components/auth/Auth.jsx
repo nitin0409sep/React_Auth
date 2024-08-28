@@ -6,9 +6,7 @@ import { useUserContext } from "../../contexts/UserContextProvider";
 const Auth = () => {
   const { user } = useUserContext();
 
-  if (user) {
-    return <Navigate to="/" />;
-  }
+  if (user) return <Navigate to="/" />;
 
   return (
     <>

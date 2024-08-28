@@ -14,8 +14,8 @@ import { UserContextProvider } from "./contexts/UserContextProvider";
 //? Routing
 const router = createBrowserRouter(
   createRoutesFromElements([
-    AuthRoutes,
-    CoreRoutes,
+    ...AuthRoutes,
+    ...CoreRoutes,
     <Route path="public" element={<Public />}></Route>,
     <Route path="*" element={<Navigate to="/" replace />}></Route>,
   ])

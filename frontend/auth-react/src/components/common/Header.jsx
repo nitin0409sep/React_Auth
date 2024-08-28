@@ -1,13 +1,28 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { useUserContext } from "../../contexts/UserContextProvider";
+import { deleteUserData } from "../../customhooks/useLocalstorage";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
-  const { user } = useUserContext();
+  const { user, setUser } = useUserContext();
+  const navigate = useNavigate();
+
+  // Logout
+  const handleLogout = () => {
+    // Change the state in Contexts
+    setUser(false);
+
+    // Clear Local Storage
+    deleteUserData();
+
+    // Navigate to Login Once Person Logout's
+    navigate("/auth/login");
+  };
 
   return (
     <>
-      <div
+      <nav
         style={{
           display: "flex",
           gap: "40px",
@@ -16,7 +31,7 @@ const Header = () => {
           padding: "40px",
           backgroundColor: "#313131",
         }}
-        className="w-full"
+        className="w-full hover:text-white"
       >
         <NavLink
           to="login"
@@ -24,6 +39,7 @@ const Header = () => {
             color: isActive ? "white" : "",
             display: user ? "none" : "block",
           })}
+          className="hover:text-white"
         >
           Login
         </NavLink>
@@ -35,6 +51,7 @@ const Header = () => {
               display: user ? "none" : "block",
             };
           }}
+          className="hover:text-white"
         >
           Register
         </NavLink>
@@ -45,6 +62,7 @@ const Header = () => {
               color: isActive ? "white" : "",
             };
           }}
+          className="hover:text-white"
         >
           Public
         </NavLink>
@@ -56,10 +74,20 @@ const Header = () => {
               display: !user ? "none" : "block",
             };
           }}
+          className="hover:text-white"
         >
           Users
         </NavLink>
-      </div>
+
+        {user && (
+          <div
+            className="font-medium text-blue-500 cursor-pointer hover:text-white transition-all delay-200 ease-in-out"
+            onClick={handleLogout}
+          >
+            Logout
+          </div>
+        )}
+      </nav>
     </>
   );
 };
