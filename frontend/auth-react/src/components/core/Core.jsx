@@ -14,7 +14,6 @@ const Core = () => {
   return (
     <>
       <ProtectedRoute>
-        <Header />
         <Outlet />
       </ProtectedRoute>
     </>

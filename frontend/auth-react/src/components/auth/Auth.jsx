@@ -10,7 +10,6 @@ const Auth = () => {
 
   return (
     <>
-      <Header />
       <Outlet />
     </>
   );

@@ -34,7 +34,7 @@ const Header = () => {
         className="w-full hover:text-white"
       >
         <NavLink
-          to="login"
+          to="/auth/login"
           style={({ isActive }) => ({
             color: isActive ? "white" : "",
             display: user ? "none" : "block",
@@ -44,7 +44,7 @@ const Header = () => {
           Login
         </NavLink>
         <NavLink
-          to="register"
+          to="/auth/register"
           style={({ isActive }) => {
             return {
               color: isActive ? "white" : "",

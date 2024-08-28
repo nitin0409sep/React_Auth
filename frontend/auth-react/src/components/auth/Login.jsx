@@ -40,7 +40,7 @@ const Login = () => {
           method="post"
           onSubmit={handleSubmit}
         >
-          <div className="flex flex-col gap-5 w-1/3 max-flex-1 pb-10 bg-gray-300 shadow-md rounded-xl items-center">
+          <div className="flex flex-col gap-5 lg:w-1/2 sm:w-full max-flex-1 pb-10 bg-gray-300 shadow-md rounded-xl items-center">
             <div className="flex flex-col gap-1 w-full pl-10 pr-10 pt-10">
               <label htmlFor="email" className="text-black pl-2">
                 Email

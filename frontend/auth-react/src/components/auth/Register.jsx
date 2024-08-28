@@ -7,7 +7,7 @@ const Register = () => {
       <div className="flex flex-col w-full items-center max-flex-1 gap-10 p-10 h-full">
         <h1 className="text-5xl">Register</h1>
 
-        <div className="flex flex-col gap-2 w-1/3 bg-gray-300 max-flex-1 pb-5 shadow-md rounded-xl items-center">
+        <div className="flex flex-col gap-2  lg:w-1/3 sm:w-full bg-gray-300 max-flex-1 pb-5 shadow-md rounded-xl items-center">
           <div className="flex flex-col gap-1 w-full pl-10 pr-10 pt-10">
             <label htmlFor="name" className="text-black pl-2">
               Name
