@@ -1,34 +1,42 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useUserContext } from "../../contexts/UserContextProvider";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 const apiUrl = import.meta.env.VITE_API_URL;
 import { setUserData } from "../../customhooks/useLocalstorage";
+import { Loader, Toast } from "../../index";
+import axios from "axios";
 
 const Login = () => {
-  const { setUser } = useUserContext();
+  const { setUser, setShowToast, setToastMessage, setToastError } =
+    useUserContext();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
+  // SUBMIT FORM
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+
     try {
-      setLoading(true);
       const { data } = await axios.post(`${apiUrl}/auth/login`, {
         email,
         password,
       });
 
-      setUserData(data.data.tokens.accessToken);
+      // Save Token in Local Storage
+      setUserData(data.tokens.accessToken);
       setUser(true);
 
+      setShowToast(true);
+      setToastMessage("Logged In Suuccessfully!!!");
+      setLoading(false);
       navigate("/");
     } catch (error) {
-      console.log("Login failed:", error?.response?.data?.error);
-    } finally {
       setLoading(false);
+      setShowToast(true);
+      setToastError(error?.response?.data?.error);
     }
   };
 
@@ -73,16 +81,16 @@ const Login = () => {
               />
             </div>
 
-            <div className="flex flex-col gap-1 w-full pr-10 pl-10 ">
+            <div className="flex flex-col gap-1 w-full pr-10 pl-10">
               <button
-                className="outline-none"
+                className="outline-none text-center flex justify-center"
                 type="submit"
-                disabled={!email || !password}
+                disabled={!email || !password || loading}
                 style={{
-                  backgroundColor: !email || !password ? "gray" : "",
+                  backgroundColor: !email || !password || loading ? "gray" : "",
                 }}
               >
-                Login
+                {loading ? <Loader height={35} width={35} /> : "Login"}
               </button>
               <p className="flex justify-center gap-1 text-black">
                 <span>Don't have an account?</span>

@@ -13,6 +13,11 @@ export const UserContextProvider = ({ children }) => {
   const [user, setUser] = useState(false);
   const [role, setRole] = useState(null);
 
+  // TOAST
+  const [showToast, setShowToast] = useState(false);
+  const [toastMessage, setToastMessage] = useState("");
+  const [toastError, setToastError] = useState("");
+
   useEffect(() => {
     const token = getUserData();
 
@@ -36,7 +41,18 @@ export const UserContextProvider = ({ children }) => {
     }
   }, [user]);
 
-  const value = { user, setUser, role, setRole };
+  const value = {
+    user,
+    setUser,
+    role,
+    setRole,
+    showToast,
+    setShowToast,
+    toastError,
+    setToastError,
+    toastMessage,
+    setToastMessage,
+  };
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 };

@@ -24,6 +24,7 @@ const ProtectedRoute = ({ allowedRoles, children }) => {
 
   //! The ProtectedRoute component checks the user's authorization and, if successful, uses <Outlet /> to pass control to the child route's component, which is then rendered in the appropriate part of the parent layout.
   return <Outlet />;
+  // return <User />; We can return it also or any component as per requirement
 };
 
 export default ProtectedRoute;

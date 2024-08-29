@@ -1,13 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Header } from "../../index";
 import { Outlet } from "react-router-dom";
+import { useUserContext } from "../../contexts/UserContextProvider";
+import { Toast } from "../../index";
+
 const Layout = () => {
+  const { showToast, setShowToast } = useUserContext();
+
+  useEffect(() => {
+    setShowToast(!!showToast);
+  }, [showToast]);
+
   return (
     <>
       <Header />
       <>
         <Outlet />
       </>
+      {showToast && <Toast />}
     </>
   );
 };
