@@ -36,9 +36,13 @@ export const LoginController = async (req: Request, res: Response) => {
         // Handle invalid password
         if (!isValidPassword) return res.status(401).json({ error: "Invalid password" });
 
+        // Role
+        const role = isUser.role_id === 1 ? 'Admin' : 'User';
+
         // If everything is valid, proceed to log in the user
-        const tokens = jwtTokens({ user_id: isUser.id, email: normalizedEmail, user_name: isUser.name });
-        return res.status(200).json(tokens);
+        const tokens = jwtTokens({ user_id: isUser.user_id, email: normalizedEmail, user_name: isUser.user_name, role: role });
+
+        return res.status(200).json({ data: { tokens } });
 
     } catch (error) {
         console.error("Error in loginController:", error);
@@ -50,7 +54,7 @@ export const LoginController = async (req: Request, res: Response) => {
 //? REGISTER CONTROLLER 
 export const RegisterController = async (req: Request, res: Response) => {
     try {
-        const { user_name, email, password, role_id } = req.body as {
+        const { user_name, email, password, role_id = 2 } = req.body as {
             user_name: string;
             email: string;
             password: string;

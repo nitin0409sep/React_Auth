@@ -1,6 +1,6 @@
 import jsonwebtoken from 'jsonwebtoken';
 
-export const jwtTokens = (user_args: { user_id: string, email: string, user_name: string }) => {
+export const jwtTokens = (user_args: { user_id: string, email: string, user_name: string, role: string }) => {
     try {
         const user = user_args;
 
