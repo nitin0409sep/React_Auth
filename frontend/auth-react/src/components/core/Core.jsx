@@ -13,9 +13,7 @@ const Core = () => {
 
   return (
     <>
-      <ProtectedRoute>
-        <Outlet />
-      </ProtectedRoute>
+      <Outlet />
     </>
   );
 };

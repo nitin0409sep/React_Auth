@@ -21,8 +21,9 @@ const Login = () => {
         password,
       });
 
-      setUserData(data.accessToken);
-      setUser(data.accessToken);
+      setUserData(data.data.tokens.accessToken);
+      setUser(true);
+
       navigate("/");
     } catch (error) {
       console.log("Login failed:", error?.response?.data?.error);

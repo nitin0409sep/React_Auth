@@ -5,7 +5,7 @@ import { deleteUserData } from "../../customhooks/useLocalstorage";
 import { useNavigate } from "react-router-dom";
 
 const Header = () => {
-  const { user, setUser } = useUserContext();
+  const { user, setUser, role } = useUserContext();
   const navigate = useNavigate();
 
   // Logout
@@ -33,6 +33,7 @@ const Header = () => {
         }}
         className="w-full hover:text-white"
       >
+        {/* Public */}
         <NavLink
           to="/auth/login"
           style={({ isActive }) => ({
@@ -43,6 +44,7 @@ const Header = () => {
         >
           Login
         </NavLink>
+
         <NavLink
           to="/auth/register"
           style={({ isActive }) => {
@@ -55,6 +57,7 @@ const Header = () => {
         >
           Register
         </NavLink>
+
         <NavLink
           to="/public"
           style={({ isActive }) => {
@@ -66,19 +69,67 @@ const Header = () => {
         >
           Public
         </NavLink>
-        <NavLink
-          to="/user"
-          style={({ isActive }) => {
-            return {
-              color: isActive ? "white" : "",
-              display: !user ? "none" : "block",
-            };
-          }}
-          className="hover:text-white"
-        >
-          Users
-        </NavLink>
 
+        {/* User */}
+        {role === "user" && user && (
+          <NavLink
+            to="/user"
+            style={({ isActive }) => {
+              return {
+                color: isActive ? "white" : "",
+                display: !user ? "none" : "block",
+              };
+            }}
+            className="hover:text-white"
+          >
+            Users
+          </NavLink>
+        )}
+
+        {role === "user" && user && (
+          <NavLink
+            to="/viewPosts"
+            style={({ isActive }) => {
+              return {
+                color: isActive ? "white" : "",
+                display: !user ? "none" : "block",
+              };
+            }}
+            className="hover:text-white"
+          >
+            View Posts
+          </NavLink>
+        )}
+
+        {/* Admin */}
+        {user && role === "admin" && (
+          <NavLink
+            to="/createUser"
+            style={({ isActive }) => {
+              return {
+                color: isActive ? "white" : "",
+                display: !user ? "none" : "block",
+              };
+            }}
+            className="hover:text-white"
+          >
+            Create User
+          </NavLink>
+        )}
+        {user && role === "admin" && (
+          <NavLink
+            to="/userList"
+            style={({ isActive }) => {
+              return {
+                color: isActive ? "white" : "",
+                display: !user ? "none" : "block",
+              };
+            }}
+            className="hover:text-white"
+          >
+            View Users
+          </NavLink>
+        )}
         {user && (
           <div
             className="font-medium text-blue-500 cursor-pointer hover:text-white transition-all delay-200 ease-in-out"

@@ -7,5 +7,8 @@ import User from "./components/core/User";
 import Header from "./components/common/Header";
 import Toast from './components/common/Toast'
 import Layout from "./components/layout/Layout";
+import CreateUser from './components/core/admin/CreateUser';
+import ViewUsers from './components/core/admin/ViewUsers';
+import ViewPost from "./components/core/user/ViewPost";
 
-export { Login, Register, Public, Core, Auth, User, Header, Layout, Toast };
+export { Login, Register, Public, Core, Auth, User, Header, Layout, Toast, CreateUser, ViewUsers, ViewPost };
