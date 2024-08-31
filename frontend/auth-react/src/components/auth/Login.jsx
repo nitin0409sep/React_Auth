@@ -3,7 +3,7 @@ import { useUserContext } from "../../contexts/UserContextProvider";
 import { useNavigate } from "react-router-dom";
 const apiUrl = import.meta.env.VITE_API_URL;
 import { setUserData } from "../../customhooks/useLocalstorage";
-import { Loader, Toast } from "../../index";
+import { Loader } from "../../index";
 import axios from "axios";
 
 const Login = () => {

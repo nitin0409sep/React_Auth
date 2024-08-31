@@ -28,8 +28,8 @@ const Header = () => {
           gap: "40px",
           alignItems: "center",
           justifyContent: "center",
-          padding: "40px",
           backgroundColor: "#313131",
+          height: "10vh",
         }}
         className="w-full hover:text-white"
       >
