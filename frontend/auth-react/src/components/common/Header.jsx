@@ -73,7 +73,7 @@ const Header = () => {
         {/* User */}
         {role === "user" && user && (
           <NavLink
-            to="/user"
+            to="/users"
             style={({ isActive }) => {
               return {
                 color: isActive ? "white" : "",

@@ -4,9 +4,8 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
-import Layout from "../components/layout/Layout";
 import { AuthRoutes, CoreRoutes } from "../routes";
-import Public from "../components/common/Public";
+import { Layout, Public } from "../index";
 
 const router = createBrowserRouter(
   createRoutesFromElements([

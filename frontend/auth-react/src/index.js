@@ -20,7 +20,7 @@ export const User = lazy(() => import('./components/core/User'));
 export const ViewPost = lazy(() => import('./components/core/user/ViewPost'));
 
 // Custom Hooks
-import { GlobalLoader, Spinner } from './components/common/GlobalLoader';
+import { GlobalLoader, Spinner } from './components/common/Loader';
 
 export { Header, Public, GlobalLoader, Layout, Spinner }
 
