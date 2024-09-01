@@ -32,11 +32,14 @@ export const UserContextProvider = ({ children }) => {
           return;
         }
 
-        setRole((decodedToken.role + "").toLowerCase() ?? null);
+        // User is logged in
         setUser(true);
+
+        // Set Role of User
+        setRole(() => (decodedToken.role + "").toLowerCase() ?? null);
       } catch (error) {
         setUser(false);
-        setRole(null);
+        setRole(() => null);
       }
     }
   }, [user]);

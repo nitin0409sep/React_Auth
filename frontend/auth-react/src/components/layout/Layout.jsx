@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { Header } from "../../index";
+import React, { useEffect, Suspense } from "react";
+import { Header, GlobalLoader } from "../../index";
 import { Outlet } from "react-router-dom";
 import { useUserContext } from "../../contexts/UserContextProvider";
 import Toast from "../common/Toast";

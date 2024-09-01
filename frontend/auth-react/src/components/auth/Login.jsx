@@ -3,7 +3,7 @@ import { useUserContext } from "../../contexts/UserContextProvider";
 import { useNavigate } from "react-router-dom";
 const apiUrl = import.meta.env.VITE_API_URL;
 import { setUserData } from "../../customhooks/useLocalstorage";
-import { Loader } from "../../index";
+import { Spinner } from "../../index";
 import axios from "axios";
 
 const Login = () => {
@@ -90,7 +90,7 @@ const Login = () => {
                   backgroundColor: !email || !password || loading ? "gray" : "",
                 }}
               >
-                {loading ? <Loader height={35} width={35} /> : "Login"}
+                {loading ? <Spinner height={35} width={35} /> : "Login"}
               </button>
               <p className="flex justify-center gap-1 text-black">
                 <span>Don't have an account?</span>

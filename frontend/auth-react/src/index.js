@@ -1,15 +1,37 @@
 import { lazy } from 'react';
-import Loader from './components/common/Loader';
+import Layout from './components/layout/Layout';
 
+// Auth Components
+export const Auth = lazy(() => import('./components/auth/Auth'));
 export const Login = lazy(() => import('./components/auth/Login'));
 export const Register = lazy(() => import('./components/auth/Register'));
-export const Public = lazy(() => import('./components/common/Public'));
-export const Core = lazy(() => import('./components/core/Core'));
-export const Auth = lazy(() => import('./components/auth/Auth'));
-export const User = lazy(() => import('./components/core/User'));
-export const Header = lazy(() => import('./components/common/Header'));
-export const Layout = lazy(() => import('./components/layout/Layout'));
+
+// Public Components
+import Header from './components/common/Header'
+import Public from './components/common/Public';
+
+// Core Components
+// Admin
 export const CreateUser = lazy(() => import('./components/core/admin/CreateUser'));
-export const ViewUsers = lazy(() => import('./components/core/admin/ViewUsers'));
+export const ViewUsers = lazy(() => loadCompSlow(import('./components/core/admin/ViewUsers')));
+
+// User
+export const User = lazy(() => import('./components/core/User'));
 export const ViewPost = lazy(() => import('./components/core/user/ViewPost'));
-export { Loader }
+
+// Custom Hooks
+import { GlobalLoader, Spinner } from './components/common/GlobalLoader';
+
+export { Header, Public, GlobalLoader, Layout, Spinner }
+
+
+// Load a component slow
+const loadCompSlow = (url) => {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve(url);
+        }, 4000)
+    })
+}
+
+
