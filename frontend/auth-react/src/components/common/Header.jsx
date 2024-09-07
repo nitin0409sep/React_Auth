@@ -22,17 +22,7 @@ const Header = () => {
 
   return (
     <>
-      <nav
-        style={{
-          display: "flex",
-          gap: "40px",
-          alignItems: "center",
-          justifyContent: "center",
-          backgroundColor: "#313131",
-          height: "10vh",
-        }}
-        className="w-full hover:text-white"
-      >
+      <nav className="w-full flex gap-14 items-center justify-center p-5 text-2xl bg-[#313131] fixed z-10 border-b">
         {/* Public */}
         <NavLink
           to="/auth/login"
@@ -40,7 +30,9 @@ const Header = () => {
             color: isActive ? "white" : "",
             display: user ? "none" : "block",
           })}
-          className="hover:text-white"
+          className="font-medium 
+          text-blue-400 font-serif cursor-pointer
+                    hover:scale-100 hover:text-white transform transition-all duration-300 ease-in-out hover:rounded-t-none"
         >
           Login
         </NavLink>
@@ -53,7 +45,9 @@ const Header = () => {
               display: user ? "none" : "block",
             };
           }}
-          className="hover:text-white"
+          className="font-medium 
+          text-blue-400 font-serif cursor-pointer
+                    hover:scale-100 hover:text-white transform transition-all duration-300 ease-in-out hover:rounded-t-none"
         >
           Register
         </NavLink>
@@ -65,7 +59,9 @@ const Header = () => {
               color: isActive ? "white" : "",
             };
           }}
-          className="hover:text-white"
+          className="font-medium 
+          text-blue-400 font-serif cursor-pointer
+                    hover:scale-100 hover:text-white transform transition-all duration-300 ease-in-out hover:rounded-t-none"
         >
           Public
         </NavLink>
@@ -73,16 +69,18 @@ const Header = () => {
         {/* User */}
         {role === "user" && user && (
           <NavLink
-            to="/users"
+            to="/addPost"
             style={({ isActive }) => {
               return {
                 color: isActive ? "white" : "",
                 display: !user ? "none" : "block",
               };
             }}
-            className="hover:text-white"
+            className="font-medium 
+          text-blue-400 font-serif cursor-pointer
+                    hover:scale-100 hover:text-white transform transition-all duration-300 ease-in-out hover:rounded-t-none"
           >
-            Users
+            Add Post
           </NavLink>
         )}
 
@@ -95,7 +93,9 @@ const Header = () => {
                 display: !user ? "none" : "block",
               };
             }}
-            className="hover:text-white"
+            className="font-medium 
+            text-blue-400 font-serif cursor-pointer
+                      hover:scale-100 hover:text-white transform transition-all duration-300 ease-in-out hover:rounded-t-none"
           >
             View Posts
           </NavLink>
@@ -111,7 +111,9 @@ const Header = () => {
                 display: !user ? "none" : "block",
               };
             }}
-            className="hover:text-white"
+            className="font-medium 
+            text-blue-400 font-serif cursor-pointer
+                      hover:scale-100 hover:text-white transform transition-all duration-300 ease-in-out hover:rounded-t-none"
           >
             Create User
           </NavLink>
@@ -125,14 +127,18 @@ const Header = () => {
                 display: !user ? "none" : "block",
               };
             }}
-            className="hover:text-white"
+            className="font-medium 
+          text-blue-400 font-serif cursor-pointer
+                    hover:scale-100 hover:text-white transform transition-all duration-300 ease-in-out hover:rounded-t-none"
           >
             View Users
           </NavLink>
         )}
         {user && (
           <div
-            className="font-medium text-blue-500 cursor-pointer hover:text-white transition-all delay-200 ease-in-out"
+            className="font-medium 
+          text-blue-400 font-serif cursor-pointer
+                    hover:scale-100 hover:text-white transform transition-all duration-300 ease-in-out hover:rounded-t-none"
             onClick={handleLogout}
           >
             Logout

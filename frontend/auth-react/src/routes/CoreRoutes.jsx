@@ -1,6 +1,6 @@
 import React, { Suspense } from "react";
 import { Route } from "react-router-dom";
-import { CreateUser, ViewPost, ViewUsers, User } from "../index";
+import { CreateUser, ViewPost, ViewUsers, AddPost } from "../index";
 import { Navigate } from "react-router-dom";
 import ProtectedRoute from "./ProtectedRoutes";
 import { GlobalLoader } from "../index";
@@ -8,10 +8,10 @@ import { GlobalLoader } from "../index";
 const CoreRoutes = [
   <Route element={<ProtectedRoute allowedRoles={["user"]} />}>
     <Route
-      path="users"
+      path="addPost"
       element={
         <Suspense fallback={<GlobalLoader />}>
-          <User />
+          <AddPost />
         </Suspense>
       }
       key="user"

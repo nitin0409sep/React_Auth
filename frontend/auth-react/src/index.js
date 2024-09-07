@@ -9,6 +9,7 @@ export const Register = lazy(() => import('./components/auth/Register'));
 // Public Components
 import Header from './components/common/Header'
 import Public from './components/common/Public';
+import { GlobalLoader, Spinner } from './components/common/Loader';
 
 // Core Components
 // Admin
@@ -16,11 +17,9 @@ export const CreateUser = lazy(() => import('./components/core/admin/CreateUser'
 export const ViewUsers = lazy(() => loadCompSlow(import('./components/core/admin/ViewUsers')));
 
 // User
-export const User = lazy(() => import('./components/core/User'));
-export const ViewPost = lazy(() => import('./components/core/user/ViewPost'));
+export const AddPost = lazy(() => import('./components/core/user/AddPost/AddPost'));
+export const ViewPost = lazy(() => import('./components/core/user/ViewPost/ViewPost'));
 
-// Custom Hooks
-import { GlobalLoader, Spinner } from './components/common/Loader';
 
 export { Header, Public, GlobalLoader, Layout, Spinner }
 

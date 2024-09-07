@@ -15,7 +15,9 @@ const Layout = () => {
     <>
       <Header />
       <>
-        <Outlet />
+        <div className="relative pt-20 h-full w-full">
+          <Outlet />
+        </div>
       </>
       {showToast && <Toast />}
     </>
