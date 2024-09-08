@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useUserContext } from "../../contexts/UserContextProvider";
 import { useNavigate } from "react-router-dom";
 const apiUrl = import.meta.env.VITE_API_URL;
-import { setUserData } from "../../customhooks/useLocalstorage";
+import { setUserData } from "../utils/customhooks/useLocalstorage";
 import { Spinner } from "../../index";
 import axios from "axios";
 
@@ -43,14 +43,14 @@ const Login = () => {
 
   return (
     <>
-      <div className="flex flex-col w-full items-center max-flex-1 gap-10 p-20 h-full">
-        <h1 className="text-5xl">Login</h1>
+      <div className="flex flex-col w-ful items-center max-flex-1 gap-10 p-20 h-full font-serif justify-center">
+        <h1 className="text-5xl text-white">Login</h1>
         <form
-          className="flex flex-col w-full items-center"
+          className="flex flex-col w-full items-center md:w-1/2 lg:w-2/5 text-2xl"
           method="post"
           onSubmit={handleSubmit}
         >
-          <div className="flex flex-col gap-5 lg:w-1/2 sm:w-full max-flex-1 pb-10 bg-gray-300 shadow-md rounded-xl items-center">
+          <div className="flex flex-col gap-5 w-full max-flex-1 pb-10 bg-gray-300 shadow-md rounded-xl items-center">
             <div className="flex flex-col gap-1 w-full pl-10 pr-10 pt-10">
               <label htmlFor="email" className="text-black pl-2">
                 Email
@@ -84,18 +84,23 @@ const Login = () => {
 
             <div className="flex flex-col gap-1 w-full pr-10 pl-10">
               <button
-                className="outline-none text-center flex justify-center"
+                className="outline-none text-center flex justify-center p-2 rounded-xl bg-blue-400 hover:text-black text-white text-4xl"
                 type="submit"
                 disabled={!email || !password || loading}
                 style={{
                   backgroundColor: !email || !password || loading ? "gray" : "",
                 }}
               >
-                {loading ? <Spinner height={35} width={35} /> : "Login"}
+                {loading ? <Spinner height={25} width={25} /> : "Login"}
               </button>
-              <p className="flex justify-center gap-1 text-black">
+              <p className="flex justify-center gap-1 text-black text-xl font-medium">
                 <span>Don't have an account?</span>
-                <a href="/register">Register</a>
+                <a
+                  href="/auth/register"
+                  className="text-blue-400 hover:text-blue-700"
+                >
+                  Register
+                </a>
               </p>
             </div>
           </div>

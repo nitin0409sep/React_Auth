@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { AddPost } from "../../../utils/AddPost.interface";
+import { AddPost } from "../../../utils/Interfaces/AddPost.interface";
 import { Spinner } from "../../../common/Loader";
 import { useUserContext } from "../../../../contexts/UserContextProvider";
 
@@ -40,38 +40,41 @@ const AddPostForm = ({ image }) => {
         <>
             <form
                 onSubmit={handleSubmit(onSubmit, onError)}
-                className="h-full grid grid-rows-[1fr_auto] gap-2 p-2"
+                className="h-full grid grid-rows-[auto_4rem] gap-2 p-2 pt-0"
             >
-                <div className="h-full w-full grid grid-cols-1 grid-rows-[9rem_12rem_auto] gap-10">
-                    <div className={`grid grid-cols-1 gap-3 ${errors.title ? "grid-rows-[3rem_4rem_1rem]" : "grid-rows-[3rem_auto]"}`}>
+                <div className="h-full w-full grid grid-cols-1 grid-rows-[8rem_8rem_auto] gap-3">
+                    <div className={`grid grid-cols-1 ${errors.title ? "grid-rows-[2rem_5rem_2rem]" : "grid-rows-[2.3rem_5rem]"}`}>
                         <label
                             htmlFor="title"
-                            className="text-5xl font-serif pl-4 text-gray-200"
+                            className="text-xl font-serif pl-2 text-gray-200"
                         >
                             Title
                         </label>
                         <input
                             type="text"
                             id="title"
-                            className="outline-none rounded-xl bg-gray-200 text-black text-4xl pl-4"
+                            className="outline-none rounded-xl bg-gray-200 text-black text-4xl pl-2 pr-2"
                             {...register("title", {
-                                required: true,
+                                required: {
+                                    value: true,
+                                    message: "Title is required"
+                                },
                             })}
                         />
-                        {errors.title && <p className="text-red-400 text-2xl pl-4">Title is required.</p>}
+                        {errors.title && <p className="text-red-400 text-lg pl-2">{errors.title.message}</p>}
                     </div>
 
-                    <div className={`grid grid-cols-1 gap-3 ${errors.desc ? "grid-rows-[3rem_auto_1rem]" : "grid-rows-[3rem_auto]"} `}>
+                    <div className={`grid grid-cols-1 ${errors.desc ? "grid-rows-[2rem_5rem_1rem]" : "grid-rows-[3rem_5rem]"} `}>
                         <label
                             htmlFor="desc"
-                            className="text-5xl font-serif pl-4 text-gray-200 hover:text-white"
+                            className="text-xl font-serif pl-2 pr-2 text-gray-200 hover:text-white"
                         >
                             Description
                         </label>
                         <textarea
                             id="desc"
                             className="outline-none rounded-xl bg-gray-200 text-black text-3xl
-      overflow-auto resize-none p-4  text-justify break-words"
+      overflow-auto resize-none pl-2 pr-2 pt-2  text-justify break-words"
                             {...register("desc", {
                                 required: {
                                     value: true,
@@ -85,13 +88,13 @@ const AddPostForm = ({ image }) => {
 
                             maxLength={130}
                         ></textarea>
-                        {errors.desc && <p className="text-red-400 text-2xl pl-4">{errors.desc?.message}</p>}
+                        {errors.desc && <p className="text-red-400 text-lg pl-2">{errors.desc?.message}</p>}
                     </div>
 
-                    <div className="grid grid-cols-1 grid-rows-[3rem_auto] gap-3">
+                    <div className="grid grid-cols-1 grid-rows-[1.3rem_auto] gap-3">
                         <label
                             htmlFor="article"
-                            className="text-5xl font-serif pl-4 text-gray-200 "
+                            className="text-xl font-serif pl-2 pr-2 text-gray-200 "
                         >
                             Article
                         </label>

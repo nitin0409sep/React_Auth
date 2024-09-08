@@ -5,18 +5,19 @@ import AddPostForm from "../AddPostForm/AddPostForm";
 const AddPost = () => {
   const [imageData, setImageData] = useState(null);
 
-  useEffect(() => {
-    console.log(imageData);
-  }, [imageData]);
-
   return (
     <>
-      <div className="grid grid-cols-3 text-white h-full w-full">
-        <div className="col-start-1 col-end-3">
+      {/* Common container for both screen sizes */}
+      <div className="grid text-white h-full w-full pl-2 pr-2">
+        {/* For Mobile Screen - Below 700px */}
+        <div className="md:hidden grid grid-cols-1 grid-rows-[20rem_auto]">
+          <UploadImage setImageData={setImageData} />
           <AddPostForm image={imageData} />
         </div>
 
-        <div className="border-l">
+        {/* For Screens 700px and above */}
+        <div className="hidden md:grid md:grid-cols-[2fr_1.5fr]">
+          <AddPostForm image={imageData} />
           <UploadImage setImageData={setImageData} />
         </div>
       </div>

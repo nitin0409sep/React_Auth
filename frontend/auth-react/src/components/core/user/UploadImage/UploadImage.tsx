@@ -37,11 +37,11 @@ const UploadImage = ({ setImageData }) => {
                             src={image}
                             alt="Upload Image"
                             style={{ height: "100%", width: "100%", objectFit: "cover" }}
-                            className='border-r-0 border-l-0'
+                            className='border-r-0 border-l-0 rounded-xl'
                         />
                         <button
-                            className="absolute top-5 right-5 p-6 text-gray-500 text-xl font-bold shadow-lg bg-white rounded-2xl
-              hover:scale-105 transform transition-all duration-300 ease-in-out hover:text-2xl"
+                            className="absolute top-5 right-5 p-3 text-gray-500 text-xl font-bold shadow-lg bg-white rounded-2xl
+              hover:scale-105 transform transition-all duration-300 ease-in-out hover:text-xl"
                             onClick={handleButtonClick}
                         >
                             Edit Image

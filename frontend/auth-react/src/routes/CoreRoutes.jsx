@@ -5,6 +5,9 @@ import { Navigate } from "react-router-dom";
 import ProtectedRoute from "./ProtectedRoutes";
 import { GlobalLoader } from "../index";
 
+
+console.log("Rolessss");
+
 const CoreRoutes = [
   <Route element={<ProtectedRoute allowedRoles={["user"]} />}>
     <Route

@@ -2,6 +2,10 @@ import React, { useCallback, useEffect, useState } from "react";
 import { Form } from "react-router-dom";
 import { useUserContext } from "../../contexts/UserContextProvider";
 import * as EmailValidator from "email-validator";
+import { Spinner } from "../common/Loader";
+import { useNavigate } from "react-router-dom";
+import { setUserData } from "../utils/customhooks/useLocalstorage";
+import { registerUser } from "../utils/Services/Auth.service";
 
 const Register = () => {
   // Form State
@@ -15,7 +19,10 @@ const Register = () => {
   // Errors Handling
   const [errors, setErrors] = useState({});
   const [validForm, setValidForm] = useState(false);
-  const { setShowToast, setToastError } = useUserContext();
+  const { setUser, setShowToast, setToastMessage, setToastError } =
+    useUserContext();
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   //? If user has changed password, after filling password & confirm passowrd both, then validate both again
   useEffect(() => {
@@ -101,25 +108,49 @@ const Register = () => {
     <>
       <div
         style={{ height: "90vh" }}
-        className="flex flex-col justify-center items-center gap-10"
+        className="flex flex-col justify-center items-center gap-10 font-serif"
       >
-        <div className="text-center">
+        <div className="text-center text-white">
           <h1 className="text-5xl">Register</h1>
         </div>
 
         <Form
-          className="w-full flex justify-center"
+          className="w-full flex justify-center "
           method="post"
-          action="/auth/register"
-          onSubmit={(event) => {
+          onSubmit={async (event) => {
             event.preventDefault();
 
-            if (!validate()) {
+            const requestBody = {
+              user_name: formData.name,
+              email: formData.email,
+              password: formData.password,
+            };
+
+            setLoading(true);
+            try {
+              setLoading(true);
+
+              const data = await registerUser(requestBody);
+              setUserData(data.token);
+              setUser(true);
+
+              setLoading(false);
               setShowToast(true);
+              setToastMessage(data.message);
+
+              navigate("/");
+            } catch (error) {
+              console.log(error);
+              setLoading(false);
+
+              setShowToast(true);
+              setToastError(
+                error?.response?.data?.error || "Registration failed"
+              );
             }
           }}
         >
-          <div className="flex flex-col gap-3 lg:w-1/3 sm:w-2/3 md:w-1/2 bg-gray-300 shadow-md rounded-xl pl-10 pr-10 pb-2">
+          <div className="flex flex-col gap-3 bg-gray-300 shadow-md rounded-xl pl-10 pr-10 pb-2 w-4/5 md:w-1/2 lg:w-2/5 text-2xl">
             <div className="flex flex-col gap-1 pt-8">
               <label htmlFor="name" className="text-black pl-2">
                 Name
@@ -201,15 +232,22 @@ const Register = () => {
             <div className="flex flex-col gap-1 mb-5 pt-2">
               <button
                 className={`${
-                  !validForm ? "bg-gray-400 cursor-not-allowed" : ""
-                }`}
+                  !validForm
+                    ? "bg-gray-400 cursor-not-allowed"
+                    : "bg-blue-400 text-white text-2xl"
+                } p-5 rounded-xl  flex justify-center outline-none`}
                 disabled={!validForm}
               >
-                Register
+                {loading ? <Spinner height={22} width={22} /> : "Register"}
               </button>
-              <p className="text-right flex justify-center gap-1 text-black">
+              <p className="text-right flex justify-center gap-1 text-black md:text-2xl font-medium">
                 <span>Already have an account?</span>
-                <a href="/login">Login</a>
+                <a
+                  href="/auth/login"
+                  className="text-blue-400 hover:text-blue-700"
+                >
+                  Login
+                </a>
               </p>
             </div>
           </div>

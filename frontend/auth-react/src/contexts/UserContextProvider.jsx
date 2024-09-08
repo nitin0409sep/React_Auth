@@ -1,5 +1,5 @@
 import { useContext, createContext, useState, useEffect } from "react";
-import { getUserData } from "../customhooks/useLocalstorage";
+import { getUserData } from "../components/utils/customhooks/useLocalstorage";
 import { jwtDecode } from "jwt-decode";
 
 // CREATE CONTEXT
@@ -36,7 +36,7 @@ export const UserContextProvider = ({ children }) => {
         setUser(true);
 
         // Set Role of User
-        setRole(() => (decodedToken.role + "").toLowerCase() ?? null);
+        setRole(() => (decodedToken.role_id + "").toLowerCase() ?? null);
       } catch (error) {
         setUser(false);
         setRole(() => null);

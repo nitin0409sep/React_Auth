@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { useUserContext } from "../../contexts/UserContextProvider";
-import { deleteUserData } from "../../customhooks/useLocalstorage";
+import { deleteUserData } from "../utils/customhooks/useLocalstorage";
 import { useNavigate } from "react-router-dom";
 
 const Header = () => {
