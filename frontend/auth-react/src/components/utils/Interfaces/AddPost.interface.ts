@@ -1,4 +1,4 @@
-export type AddPost = {
+ export type AddPost = {
     title: string,
     desc: string,
     article: string,
