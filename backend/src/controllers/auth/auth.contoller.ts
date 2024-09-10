@@ -40,7 +40,7 @@ export const LoginController = async (req: Request, res: Response) => {
         const role = isUser.role_id === 1 ? 'Admin' : 'User';
 
         // If everything is valid, proceed to log in the user
-        const tokens = jwtTokens({ user_id: isUser.user_id, email: normalizedEmail, user_name: isUser.user_name, role: role });
+        const tokens = jwtTokens({ user_id: isUser.user_id, email: normalizedEmail, user_name: isUser.user_name, role_id: role });
 
         return res.status(200).json({ tokens });
 
@@ -84,13 +84,14 @@ export const RegisterController = async (req: Request, res: Response) => {
             const registered = await registerUser(user_name, normalizedEmail, hashedPassword, role_id);
 
             if (registered) {
+                const role = registered.role_id === 1 ? 'Admin' : 'User';
+
                 // Generate Token
-                const tokens = jwtTokens(registered);
+                const tokens = jwtTokens({ ...registered, role_id: role });
 
                 // Set Refresh Token's Cookie
                 res.cookie('refresh_token', tokens.refreshToken, { httpOnly: true, sameSite: 'none', secure: true })
 
-                const role = registered.role_id === 1 ? 'Admin' : 'User';
 
                 // Successful registered response
                 return res.status(200).json({
