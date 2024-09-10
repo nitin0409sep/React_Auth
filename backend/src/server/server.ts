@@ -19,12 +19,13 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
 //? IMPORT ROUTES
-import { authenticationRoute } from '../routes/authentication.route';
-import { userRoute } from '../routes/users.routes';
+import { AuthenticationRoute } from '../routes/authentication.route';
+import { UserRoute } from '../routes/users.routes';
+import { PostRoute } from '../routes/posts.route';
 
 //? ROUTES
-app.use('/api/v1/auth', authenticationRoute)
-app.use('/api/v1/user', userRoute)
+app.use('/api/v1/auth', AuthenticationRoute)
+app.use('/api/v1/user', UserRoute)
 
 //? ERROR HANDLING MIDDLEWARE 
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {

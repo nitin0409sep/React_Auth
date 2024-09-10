@@ -2,12 +2,12 @@ import { Router } from "express";
 import { RegisterController, LoginController } from "../controllers/auth/auth.contoller";
 
 // Router
-export const authenticationRoute = Router();
+export const AuthenticationRoute = Router();
 
 // Login
-authenticationRoute.post('/login', LoginController);
+AuthenticationRoute.post('/login', LoginController);
 
 // Register
-authenticationRoute.post('/register', RegisterController);
+AuthenticationRoute.post('/register', RegisterController);
 
 
