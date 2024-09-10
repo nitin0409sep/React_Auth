@@ -31,10 +31,10 @@ const Toast = () => {
           className={`fixed bottom-10 left-1/2 transform -translate-x-1/2 rounded-md 
         ${showToast ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"} 
         ${toastMessage ? "bg-green-400" : "bg-red-400"} 
-        h-10 flex items-center justify-center max-w-fit transition-all
-        duration-500 ease-in-out`}
+        h-14 flex items-center justify-center md:w-1/3 w-1/2 transition-all
+        duration-500 ease-in-out text-white text-4xl`}
         >
-          <span className="text-md p-4 max-w-md whitespace-nowrap overflow-hidden text-ellipsis">
+          <span className="text-2xl md:text-3xl max-w-md whitespace-nowrap overflow-hidden text-ellipsis">
             {toastMessage || toastError}
           </span>
         </div>

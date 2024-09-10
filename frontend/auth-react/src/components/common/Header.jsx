@@ -25,6 +25,20 @@ const Header = () => {
       <nav className="w-full flex gap-14 items-center justify-center p-5 text-2xl bg-[#313131] fixed z-10 border-b">
         {/* Public */}
         <NavLink
+          to="/public"
+          style={({ isActive }) => {
+            return {
+              color: isActive ? "white" : "",
+            };
+          }}
+          className="font-medium 
+            text-blue-400 font-serif cursor-pointer
+                      hover:scale-100 hover:text-white transform transition-all duration-300 ease-in-out hover:rounded-t-none"
+        >
+          Public
+        </NavLink>
+
+        <NavLink
           to="/auth/login"
           style={({ isActive }) => ({
             color: isActive ? "white" : "",
@@ -50,20 +64,6 @@ const Header = () => {
                     hover:scale-100 hover:text-white transform transition-all duration-300 ease-in-out hover:rounded-t-none"
         >
           Register
-        </NavLink>
-
-        <NavLink
-          to="/public"
-          style={({ isActive }) => {
-            return {
-              color: isActive ? "white" : "",
-            };
-          }}
-          className="font-medium 
-          text-blue-400 font-serif cursor-pointer
-                    hover:scale-100 hover:text-white transform transition-all duration-300 ease-in-out hover:rounded-t-none"
-        >
-          Public
         </NavLink>
 
         {/* User */}

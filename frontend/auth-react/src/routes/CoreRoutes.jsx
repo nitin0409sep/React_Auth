@@ -4,6 +4,7 @@ import { CreateUser, ViewPost, ViewUsers, AddPost } from "../index";
 import { Navigate } from "react-router-dom";
 import ProtectedRoute from "./ProtectedRoutes";
 import { GlobalLoader } from "../index";
+import Error from "../components/common/Error";
 
 const CoreRoutes = [
   <Route element={<ProtectedRoute allowedRoles={["user"]} />}>
@@ -14,6 +15,7 @@ const CoreRoutes = [
           <AddPost />
         </Suspense>
       }
+      errorElement={<Error />}
       key="user"
     />
     ,
@@ -24,6 +26,7 @@ const CoreRoutes = [
           <ViewPost />
         </Suspense>
       }
+      errorElement={<Error />}
       key="viewPosts"
     />
   </Route>,
@@ -35,6 +38,7 @@ const CoreRoutes = [
           <CreateUser />
         </Suspense>
       }
+      errorElement={<Error />}
       key="createUser"
     />
     ,
@@ -45,6 +49,7 @@ const CoreRoutes = [
           <ViewUsers />
         </Suspense>
       }
+      errorElement={<Error />}
       key="userList"
     />
   </Route>,

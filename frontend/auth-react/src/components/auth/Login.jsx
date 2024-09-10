@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { useUserContext } from "../../contexts/UserContextProvider";
 import { useNavigate } from "react-router-dom";
-const apiUrl = import.meta.env.VITE_API_URL;
 import { setUserData } from "../utils/customhooks/useLocalstorage";
 import { Spinner } from "../../index";
-import axios from "axios";
+import { loginUser } from "../utils/Services/Auth.service";
 
 const Login = () => {
   const { setUser, setShowToast, setToastMessage, setToastError } =
@@ -21,10 +20,7 @@ const Login = () => {
     setLoading(true);
 
     try {
-      const { data } = await axios.post(`${apiUrl}/auth/login`, {
-        email,
-        password,
-      });
+      const data = await loginUser(email, password);
 
       // Save Token in Local Storage
       setUserData(data.tokens.accessToken);
@@ -37,7 +33,10 @@ const Login = () => {
     } catch (error) {
       setLoading(false);
       setShowToast(true);
-      setToastError(error?.response?.data?.error);
+
+      console.log(error);
+
+      setToastError(error.message);
     }
   };
 

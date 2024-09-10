@@ -2,6 +2,7 @@ import { Navigate, Route } from "react-router-dom";
 import { Login, Auth, Register } from "../index";
 import { Suspense } from "react";
 import { GlobalLoader } from "../index";
+import Error from "../components/common/Error";
 
 const AuthRoutes = [
   <Route
@@ -11,6 +12,7 @@ const AuthRoutes = [
         <Auth />
       </Suspense>
     }
+    errorElement={<Error />}
   >
     <Route index={true} element={<Navigate to="login" />}></Route>
     <Route
@@ -20,6 +22,7 @@ const AuthRoutes = [
           <Login />
         </Suspense>
       }
+      errorElement={<Error />}
     ></Route>
     <Route
       path="register"
@@ -28,6 +31,7 @@ const AuthRoutes = [
           <Register />
         </Suspense>
       }
+      errorElement={<Error />}
     ></Route>
     <Route path="*" element={<Navigate to="/auth/login" replace />}></Route>
   </Route>,
