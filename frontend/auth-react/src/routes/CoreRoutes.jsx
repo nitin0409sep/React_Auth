@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import { Suspense } from "react";
 import { Route } from "react-router-dom";
 import { CreateUser, ViewPost, ViewUsers, AddPost } from "../index";
 import { Navigate } from "react-router-dom";

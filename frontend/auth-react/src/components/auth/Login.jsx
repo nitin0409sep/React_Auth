@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useUserContext } from "../../contexts/UserContextProvider";
 import { useNavigate } from "react-router-dom";
 import { setUserData } from "../utils/customhooks/useLocalstorage";
@@ -27,7 +27,7 @@ const Login = () => {
       setUser(true);
 
       setShowToast(true);
-      setToastMessage("Logged In Suuccessfully!!!");
+      setToastMessage("Logged In Successfully!!!");
       setLoading(false);
       navigate("/");
     } catch (error) {
@@ -93,7 +93,7 @@ const Login = () => {
                 {loading ? <Spinner height={25} width={25} /> : "Login"}
               </button>
               <p className="flex justify-center gap-1 text-black text-xl font-medium">
-                <span>Don't have an account?</span>
+                <span>Do not have an account?</span>
                 <a
                   href="/auth/register"
                   className="text-blue-400 hover:text-blue-700"

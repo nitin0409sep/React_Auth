@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
 import { useUserContext } from "../../contexts/UserContextProvider";
+import { useEffect } from "react";
 
 const Toast = () => {
   const {
@@ -22,7 +22,7 @@ const Toast = () => {
       setToastError("");
       setToastMessage("");
     };
-  }, [toastMessage, toastError]);
+  }, [toastMessage, toastError, setShowToast, setToastError, setToastMessage]);
 
   return (
     <>

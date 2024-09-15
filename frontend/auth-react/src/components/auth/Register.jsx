@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Form } from "react-router-dom";
 import { useUserContext } from "../../contexts/UserContextProvider";
 import * as EmailValidator from "email-validator";
@@ -29,6 +29,7 @@ const Register = () => {
     if (formData.password && formData.confirmPassword) {
       validate({ confirmPassword: "" });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [formData.password]);
 
   useEffect(() => {

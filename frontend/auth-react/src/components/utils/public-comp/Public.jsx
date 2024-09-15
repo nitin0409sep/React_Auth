@@ -1,17 +1,21 @@
-import React from "react";
-import "./ViewPost.css";
-import { useQuery } from 'react-query';
-import { fetchUserPosts } from "../../../utils/Services/Posts.service";
-import { GlobalLoader } from "../../../common/Loader";
-import Error from "../../../common/Error";
-import { Post } from "../../../utils/interfaces/Post.interface";
+import { useQuery } from "react-query";
+import { fetchPublicPosts } from "../Services/Posts.service";
+import { GlobalLoader } from "../../common/Loader";
+import Error from "../../common/Error";
+import "./Public.css";
 
-const ViewPost = () => {
-  const { data: posts, isLoading, isError, error } = useQuery("user-post", fetchUserPosts, {
+const Public = () => {
+  // isFetching, isSuccess
+  const {
+    data: posts,
+    isLoading,
+    error,
+    isError,
+  } = useQuery("public-posts", fetchPublicPosts, {
     select: (data) => {
       return data.data.posts;
     },
-  })
+  });
 
   if (isLoading) {
     return <GlobalLoader />;
@@ -22,34 +26,35 @@ const ViewPost = () => {
     return <Error />;
   }
 
-
   return (
     <div className="outer-container">
       <div className="gridcontainer">
-        {posts?.map((post: Post, index: number) => (
+        {posts.map((post, index) => (
           <div className="griditem" key={post.post_id || index}>
             <div className="innergrid">
-
               {/* Post Image */}
-              <div className="innergriditem innergriditem1">
+              <div className="innergriditem1">
                 <img
                   src={post.img_url}
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                  }}
                   alt="Post image"
                   onError={(e) => {
-                    const target = e.target as HTMLImageElement;
-                    target.onerror = null; // Prevent loop if fallback fails
-                    target.src = "/no-image.svg";
+                    e.target.onerror = null; // Prevent infinite loop in case the fallback image also fails
+                    e.target.src = "/no-image.svg";
                   }}
                 />
               </div>
 
               {/* Post Name */}
-              <div className="innergriditem innergriditem2 text-pink-600 font-bold font-serif">
+              <div className="innergriditem2 text-pink-500 bg-slate-200 font-bold font-serif">
                 {post.post_name}
               </div>
-
-              {/* Post Description */}
-              <div className="innergriditem innergriditem3">
+              {/* Description */}
+              <div className="innergriditem3 text-purple-500 bg-slate-200">
                 {post.post_desc}
               </div>
 
@@ -69,4 +74,4 @@ const ViewPost = () => {
   );
 };
 
-export default ViewPost;
+export default Public;

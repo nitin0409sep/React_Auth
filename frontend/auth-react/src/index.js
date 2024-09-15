@@ -8,7 +8,7 @@ export const Register = lazy(() => import('./components/auth/Register'));
 
 // Public Components
 import Header from './components/common/Header'
-import Public from './components/common/Public/Public';
+import Public from './components/utils/public-comp/Public';
 import { GlobalLoader, Spinner } from './components/common/Loader';
 
 // Core Components
