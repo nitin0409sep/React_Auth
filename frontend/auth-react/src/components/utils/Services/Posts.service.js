@@ -12,3 +12,7 @@ export const fetchUserPosts = async () => {
     return axiosInstance.get(`${apiUrl}/user/post`);
 }
 
+// Add User Post
+export const addUserPost = async (body) => {
+    return axiosInstance.post(`${apiUrl}/user/post`, body);
+}

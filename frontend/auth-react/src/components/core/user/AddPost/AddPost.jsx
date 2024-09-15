@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import UploadImage from "../UploadImage/UploadImage";
-import AddPostForm from "../AddPostForm/AddPostForm";
+import PostForm from "../PostForm/PostForm";
 import { Provider } from "react-redux";
 import { store } from "../../../../store/store";
 
@@ -15,12 +15,12 @@ const AddPost = () => {
           {/* For Mobile Screen - Below 700px */}
           <div className="md:hidden grid grid-cols-1 grid-rows-[20rem_auto]">
             <UploadImage setImageData={setImageData} />
-            <AddPostForm image={imageData} />
+            <PostForm image={imageData} />
           </div>
 
           {/* For Screens 700px and above */}
           <div className="hidden md:grid md:grid-cols-[2fr_1.5fr]">
-            <AddPostForm image={imageData} />
+            <PostForm image={imageData} />
             <UploadImage setImageData={setImageData} />
           </div>
         </div>
@@ -30,3 +30,4 @@ const AddPost = () => {
 };
 
 export default AddPost;
+

@@ -3,12 +3,14 @@ import { useForm } from "react-hook-form";
 import { Spinner } from "../../../common/Loader";
 import { useDispatch, useSelector } from "react-redux";
 import { addPost, resetAddPost } from "../../../../features/AddPost.slice";
+import { addUserPost } from "../../../utils/Services/Posts.service";
+import { useUserContext } from "../../../../contexts/UserContextProvider";
 
-const AddPostForm = React.memo(({ image }) => {
+const PostForm = React.memo(({ image }) => {
   const dispatch = useDispatch();
   const post = useSelector((state) => state.addPost.Post);
-
-  const { register, handleSubmit, formState, setValue, getValues, watch } =
+  const { setShowToast, setToastMessage, setToastError } = useUserContext();
+  const { register, handleSubmit, formState, setValue, getValues, reset } =
     useForm({
       defaultValues: {
         title: post.title,
@@ -22,7 +24,6 @@ const AddPostForm = React.memo(({ image }) => {
     if (image) setValue("image", image);
   }, [image, setValue]);
 
-  // Memoize handleChange to avoid unnecessary re-renders
   const handleChange = useCallback(
     (e) => {
       const { name, value } = e.target;
@@ -31,11 +32,43 @@ const AddPostForm = React.memo(({ image }) => {
     [dispatch, post]
   );
 
-  // Memoize onSubmit to avoid unnecessary re-renders
-  const onSubmit = useCallback(() => {
-    console.log(getValues());
+  const onSubmit = async () => {
+    const { title, desc, article } = getValues();
+
+    const req_body = {
+      post_name: title,
+      post_desc: desc,
+      post_article: article,
+      post_public: true,
+    };
+
+    const formData = new FormData();
+
+    for (const key in req_body) {
+      if (req_body.hasOwnProperty(key)) {
+        formData.append(key, req_body[key]);
+      }
+    }
+
+    formData.append("image", getValues("image"));
+
+    try {
+      const res = await addUserPost(formData);
+
+      if (res?.data) {
+        setShowToast(true);
+        setToastMessage(res.data.message);
+        reset();
+      }
+    } catch (error) {
+      console.log(error);
+
+      setShowToast(true);
+      setToastError(error?.response?.data.errors ?? error.message);
+    }
+
     dispatch(resetAddPost());
-  }, [dispatch, getValues]);
+  };
 
   const onError = useCallback((err) => {
     console.error("Form submission error:", err);
@@ -138,4 +171,4 @@ const AddPostForm = React.memo(({ image }) => {
   );
 });
 
-export default AddPostForm;
+export default PostForm;
