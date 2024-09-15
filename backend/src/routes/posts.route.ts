@@ -1,20 +1,19 @@
 import { Router } from "express"
-import { getPublicPostsController } from "../controllers/public/public.controller";
-import { getUserPostsController, addUserPostsController, editUserPostsController, deleteUserPostsController } from "../controllers/user/post.controller";
-import { roleBasedAuthMiddleware } from "../middlewares/auth.middleware";
+import { getUserPosts, addUserPosts, editUserPosts, deleteUserPosts } from "../controllers/user/post.controller";
+import { upload } from "../middlewares/multer.middleware";
 
 const route = Router();
 
 // Get User Posts
-route.get('/post', roleBasedAuthMiddleware('User'), getUserPostsController);
+route.get('/post', getUserPosts);
 
 // Add User Posts
-route.post('/post', roleBasedAuthMiddleware('User'), addUserPostsController);
+route.post('/post', upload.single('image'), addUserPosts);
 
 // Edit User Posts
-route.put('/post/:post_id', roleBasedAuthMiddleware('User'), editUserPostsController);
+route.put('/post/:post_id', editUserPosts);
 
 // Delete User Post
-route.delete('/post/:post_id', roleBasedAuthMiddleware('User'), deleteUserPostsController);
+route.delete('/post/:post_id', deleteUserPosts);
 
 export { route as PostRoute }

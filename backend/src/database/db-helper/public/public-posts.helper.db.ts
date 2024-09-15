@@ -1,6 +1,6 @@
 import { pool } from "../../db-config/db-connection";
 
-export const getPublicPosts = async () => {
+export const getPublicPost = async () => {
     try {
         const query = 'SELECT * FROM posts WHERE post_public = true AND post_archive = false';
         const { rows } = await pool.query(query);

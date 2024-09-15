@@ -1,11 +1,10 @@
 import { Response } from "express";
 import { ExtendedRequest } from "../../utils/user.interface";
-import { getPublicPosts } from "../../database/db-helper/public/public-posts.helper.db";
+import { getPublicPost } from "../../database/db-helper/public/public-posts.helper.db";
 
-export const getPublicPostsController = async (req: ExtendedRequest, res: Response) => {
+export const getPublicPosts = async (req: ExtendedRequest, res: Response) => {
     try {
-        const posts = await getPublicPosts();
-        console.log(posts);
+        const posts = await getPublicPost();
 
         res.status(200).json({ posts: posts, status: 200, errors: null });
     } catch (error: unknown) {

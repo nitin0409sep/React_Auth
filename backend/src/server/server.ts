@@ -11,7 +11,8 @@ import '../database/db-config/db-connection';
 
 //? PORT 
 const app = express();
-const PORT = process.env.PORT || 80;
+// const app = createApplication();
+const PORT = process.env.PORT || 3002;
 
 //? MIDDLEWARES
 app.use(cors());
