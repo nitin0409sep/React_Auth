@@ -2,7 +2,7 @@ import { pool } from "../../db-config/db-connection";
 
 export const getPublicPost = async () => {
     try {
-        const query = 'SELECT * FROM posts WHERE post_public = true AND post_archive = false';
+        const query = 'SELECT * FROM posts WHERE post_public = true AND post_archive = false order by created_at DESC';
         const { rows } = await pool.query(query);
 
         // Return the rows or an empty array if no posts are found
