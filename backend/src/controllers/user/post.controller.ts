@@ -4,25 +4,36 @@ import { addUserPost, deleteUserPost, editUserPost, getUserPost } from "../../da
 import { uploadOnCloudinary } from "../../utils/cloudinary";
 
 // Get User Posts Controller
+// Get User Posts Controller
 export const getUserPosts = async (req: ExtendedRequest, res: Response) => {
-    const user_id: string | null = req.user?.user_id ?? null;
+    const user_id: string | null | undefined = req.user?.user_id;
 
-    if (!user_id)
+    if (!user_id) {
         return res.status(401).json({ posts: [], status: 401, errors: "User not found" });
+    }
 
     try {
         const posts = await getUserPost(user_id);
 
-        if (!posts?.length) {
-            return res.status(500).json({ error: "Posts couldn't be founded, please try again", status: 500 });
+        if (!posts || posts.length === 0) {
+            return res.status(404).json({ error: "No posts found", status: 404 });
         }
 
-        return res.status(200).json({ posts: posts, status: 200, error: null });
+        const response = posts.map((post) => ({
+            post_id: post.post_id,
+            post_name: post.post_name,
+            post_desc: post.post_desc,
+            post_article: post.post_article,
+            img_url: post.img_url,
+        }));
+
+        return res.status(200).json({ posts: response, status: 200, error: null });
     } catch (error) {
-        console.error('Error Adding Post:', error);
+        console.error(`Error fetching posts for user_id ${user_id}:`, error);
         return res.status(500).json({ error: "An unexpected error occurred", status: 500 });
     }
-}
+};
+
 
 // Add User Posts Controller
 export const addUserPosts = async (req: ExtendedRequest, res: Response) => {
