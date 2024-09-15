@@ -6,7 +6,7 @@ import { uploadOnCloudinary } from "../../utils/cloudinary";
 // Get User Posts Controller
 // Get User Posts Controller
 export const getUserPosts = async (req: ExtendedRequest, res: Response) => {
-    const user_id: string | null | undefined = req.user?.user_id;
+    const user_id: string | null = req.user!.user_id;
 
     if (!user_id) {
         return res.status(401).json({ posts: [], status: 401, errors: "User not found" });
